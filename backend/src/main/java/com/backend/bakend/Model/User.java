@@ -1,4 +1,4 @@
-package com.backend.bakend;
+package com.backend.bakend.Model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

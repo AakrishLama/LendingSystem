@@ -1,4 +1,4 @@
-package com.backend.bakend;
+package com.backend.bakend.controller;
 
 import java.util.List;
 
@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.backend.bakend.Model.User;
+import com.backend.bakend.repo.UserRepository;
 
 @RestController
 public class UserController {
@@ -19,9 +22,9 @@ public class UserController {
   }
 
   @GetMapping("/user")
-public List<User> user() {
+  public List<User> user() {
     List<User> users = repo.findAll();
-    return users; 
-}
+    return users;
+  }
 
 }
