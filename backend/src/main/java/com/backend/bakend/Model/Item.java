@@ -19,6 +19,7 @@ public class Item {
   private int pricePerDay;
   private String date;
   private Category category;
+  private boolean available = true;
   @DBRef
   private User ownerId; 
 

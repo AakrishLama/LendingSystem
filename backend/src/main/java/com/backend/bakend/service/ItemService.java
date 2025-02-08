@@ -1,5 +1,6 @@
 package com.backend.bakend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +16,27 @@ public class ItemService {
 
   @Autowired
   ItemRepository itemRepo;
-  @Autowired 
+  @Autowired
   UserRepository userRepo;
+
   public Item addItem(Item item, String ownerId) {
     User owner = userRepo.findById(ownerId).orElse(null);
-    if (owner != null){
-      item.setOwnerId(owner);
-    }else{
+    if (owner == null) {
       throw new RuntimeException("Owner not found");
     }
-    System.out.println(item.toString());
+    // Save the item first to ensure it has an ID to use the Item id in user db.
+    item = itemRepo.save(item);
+
+
+    owner.getItems().add(item);
+    userRepo.save(owner);
+
+    item.setOwnerId(owner);
     return itemRepo.save(item);
   }
+
   public List<Item> getAllItems() {
     return itemRepo.findAll();
   }
-  
+
 }
- 
