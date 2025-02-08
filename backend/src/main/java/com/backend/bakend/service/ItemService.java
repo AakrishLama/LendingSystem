@@ -45,4 +45,20 @@ public class ItemService {
     return itemRepo.findAll();
   }
 
+  public void deleteItem(String id) {
+    Item targetItem = itemRepo.findById(id).orElse(null);
+    if (targetItem == null){
+      throw new RuntimeException("Item not found");
+    } else{
+      // to find the find owner Id so that we can remove that item from the owner as well.
+      String ownerId = targetItem.getOwnerId();
+      User owner = userRepo.findById(ownerId).orElse(null);
+      owner.getItems().remove(id + " " + targetItem.getName());     // removing the itemid with name from the owner
+      owner.setCredits(owner.getCredits() - 100);       // decrementing 100 credits after deleting an item.
+      // save the owner with deleted itemid and decremented credits.
+      userRepo.save(owner);
+      itemRepo.delete(targetItem);
+    }
+  }
+
 }
