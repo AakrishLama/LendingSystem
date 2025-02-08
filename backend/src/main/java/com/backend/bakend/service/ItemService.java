@@ -33,6 +33,9 @@ public class ItemService {
     }
 
     owner.getItems().add(item.getId() + " " + item.getName());
+    // incrementing 100 credits after adding an item.
+    int creditsInc = owner.getCredits() + 100;
+    owner.setCredits(creditsInc);
     userRepo.save(owner);
     item.setOwnerId(owner.getId());
     return itemRepo.save(item);
