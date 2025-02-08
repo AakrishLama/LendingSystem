@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@SpringBootApplication
-@EnableMongoRepositories(basePackages = "com.backend.bakend.repo") // Ensure this is added
+@SpringBootApplication(scanBasePackages = "com.backend.bakend")
+@EnableMongoRepositories(basePackages = "com.backend.bakend.repo")
 public class BakendApplication {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) { 
         SpringApplication.run(BakendApplication.class, args);
     }
 }

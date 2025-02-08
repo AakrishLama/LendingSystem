@@ -3,10 +3,12 @@ package com.backend.bakend.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.backend.bakend.Model.User;
 import com.backend.bakend.repo.UserRepository;
 
+@Service
 public class UserService {
 
   @Autowired
@@ -17,7 +19,12 @@ public class UserService {
   }
 
   public User addUser(User user) {
+    System.out.println(user.toString());
     return repo.save(user);
+  }
+
+  public void deleteAllUser() {
+    repo.deleteAll();
   }
   
 }

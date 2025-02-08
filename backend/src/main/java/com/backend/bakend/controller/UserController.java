@@ -3,18 +3,21 @@ package com.backend.bakend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.bakend.Model.User;
-import com.backend.bakend.repo.UserRepository;
+import com.backend.bakend.service.UserService;
 
 @RestController
 public class UserController {
 
   @Autowired
-  UserRepository repo;
+  UserService userService;
 
   @RequestMapping("/")
   public String greet() {
@@ -23,8 +26,12 @@ public class UserController {
 
   @GetMapping("/user")
   public List<User> user() {
-    List<User> users = repo.findAll();
-    return users;
+    return userService.getAllUsers();
+  }
+
+  @PostMapping("/addUser")
+  public User addUser(@RequestBody User user) {
+    return userService.addUser(user);
   }
 
 }
