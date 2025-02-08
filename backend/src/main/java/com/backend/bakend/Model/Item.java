@@ -1,14 +1,28 @@
 package com.backend.bakend.Model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
 @Data
+@Document(collection = "item")
 public class Item {
+  @Id
+  private String id;
   private String name;
   private String description;
   private int pricePerDay;
-  private String image; 
-  private String date=new Date().toString();
+  private String date;
+  private Category category;
+
+  public String getDate() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    date = LocalDateTime.now().format(formatter); // Get current date & time
+    return date;
+  }
 }
