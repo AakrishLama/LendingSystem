@@ -19,6 +19,7 @@ public class UserService {
   }
 
   public User addUser(User user) {
+    System.out.println(user.toString());
     return repo.save(user);
   }
   

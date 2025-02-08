@@ -10,6 +10,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -24,12 +26,9 @@ public class User {
   private String password;
   private int credits;
   private String date;
-  @DBRef
-  private ArrayList<Item> items = new ArrayList<>();
 
-  public User() {
-    this.items = new ArrayList<>();
-  }
+  private ArrayList<String> items = new ArrayList<>();
+
 
   public String getDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

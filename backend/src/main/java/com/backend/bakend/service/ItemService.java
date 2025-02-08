@@ -27,11 +27,14 @@ public class ItemService {
     // Save the item first to ensure it has an ID to use the Item id in user db.
     item = itemRepo.save(item);
 
+    // Ensure the owner has an initialized list
+    if (owner.getItems() == null) {
+      owner.setItems(new ArrayList<>()); // Initialize if null
+    }
 
-    owner.getItems().add(item);
+    owner.getItems().add(item.getId() + " " + item.getName());
     userRepo.save(owner);
-
-    item.setOwnerId(owner);
+    item.setOwnerId(owner.getId());
     return itemRepo.save(item);
   }
 

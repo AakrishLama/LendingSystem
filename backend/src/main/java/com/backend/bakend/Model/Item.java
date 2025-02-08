@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Document(collection = "item")
@@ -20,8 +22,9 @@ public class Item {
   private String date;
   private Category category;
   private boolean available = true;
-  @DBRef
-  private User ownerId; 
+
+
+  private String ownerId;
 
   public String getDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
