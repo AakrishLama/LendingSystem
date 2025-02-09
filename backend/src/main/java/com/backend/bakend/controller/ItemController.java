@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.bakend.Model.Item;
+import com.backend.bakend.service.ContractService;
 import com.backend.bakend.service.ItemService;
 
 @RestController
 public class ItemController {
-  
+
   @Autowired
   ItemService itemService;
+
+  @Autowired
+  ContractService contractService;
 
   @PostMapping("/addItem")
   public Item addItem(@RequestBody Item item, @RequestParam String ownerId) {
@@ -31,7 +35,15 @@ public class ItemController {
   }
 
   @DeleteMapping("/deleteItem/{id}")
-  public void deleteItem(@PathVariable String id){
+  public void deleteItem(@PathVariable String id) {
     itemService.deleteItem(id);
+  }
+
+  @PostMapping("/addContract/{borrowerId}/{itemId}/{startDate}/{endDate}")
+  public String addContract(@PathVariable String borrowerId,
+      @PathVariable String itemId,
+      @PathVariable int startDate,
+      @PathVariable int endDate) {
+    return contractService.addContract(borrowerId, itemId, startDate, endDate);
   }
 }
