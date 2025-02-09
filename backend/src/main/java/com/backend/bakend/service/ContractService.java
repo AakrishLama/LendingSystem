@@ -1,5 +1,7 @@
 package com.backend.bakend.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class ContractService {
   @Autowired
   ItemRepository itemRepo;
 
+  private ArrayList<Contract> contracts = new ArrayList<>();
 
   public String addContract(String borrowerId, String itemId, int startDate, int endDate) {
     // setting the borrower for the contract.
@@ -49,11 +52,11 @@ public class ContractService {
     } else {
       // saving the borrower with decremented credits.
       borrower.setCredits(borrower.getCredits() - totalCreditRequired);
-      userRepo.save(borrower);        
+      userRepo.save(borrower);
 
       // setting the item as not available and saving it.
-      item.setAvailable(false);      
-      itemRepo.save(item);   
+      item.setAvailable(false);
+      itemRepo.save(item);
 
       // setting the owner with incremented credits.
       owner.setCredits(totalCreditRequired + owner.getCredits());
@@ -61,9 +64,32 @@ public class ContractService {
 
       contract.setStartDate(startDate);
       contract.setEndDate(endDate);
+
+      // date of contract creation
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      String dateOfCreation = LocalDateTime.now().format(formatter);
+      contract.setDateOfCreation(dateOfCreation);
+
+      // saving the contract.
       contractRepo.save(contract);
+
+      contracts.add(contract);
       return "Contract created successfully";
     }
   }
 
+  public void deleteContract(String id) {
+    Contract contractDeletion = contractRepo.findById(id).orElse(null); 
+    contractDeletion.getItem().setAvailable(true);
+    contractRepo.delete(contractDeletion);
+  }
+
+  // public Contract getContract() {
+  // for (Contract contract : contracts) {
+  // return contract.toString();
+  // }
+  // return null;
+  // }
+
+  // scheduling to delete contracts after the end date.
 }

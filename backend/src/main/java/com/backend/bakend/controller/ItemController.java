@@ -46,4 +46,9 @@ public class ItemController {
       @PathVariable int endDate) {
     return contractService.addContract(borrowerId, itemId, startDate, endDate);
   }
+
+  @DeleteMapping("/deleteContract/{id}")
+  public void deleteContract(@PathVariable String id) {
+    contractService.deleteContract(id);
+  }
 }

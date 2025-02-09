@@ -1,16 +1,15 @@
 package com.backend.bakend.Model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Document("Contract")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Contract {
   
   @Id
@@ -20,4 +19,5 @@ public class Contract {
   private Item item;
   private User borrower;
   private User owner;
+  private String dateOfCreation;
 }
