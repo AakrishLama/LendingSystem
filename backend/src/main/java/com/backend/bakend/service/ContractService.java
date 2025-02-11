@@ -28,7 +28,17 @@ public class ContractService {
   @Autowired
   ItemRepository itemRepo;
 
+  private int advanceDay = 0;
+  private LocalDate currentDate = LocalDate.now();
   private ArrayList<Contract> contracts = new ArrayList<>();
+
+  public void setAdvanceDay(int days) {
+    this.advanceDay = days;
+  }
+
+  public int getAdvanceDay() {
+    return advanceDay;
+  }
 
   public String addContract(String borrowerId, String itemId, String startDate, String endDate) {
     // setting the borrower for the contract.
@@ -49,7 +59,7 @@ public class ContractService {
       return "Item is not available";
     }
 
-    LocalDate start = LocalDate.parse(startDate.trim(), formatter());    // trim to remove leading and ending spaces.
+    LocalDate start = LocalDate.parse(startDate.trim(), formatter()); // trim to remove leading and ending spaces.
     LocalDate end = LocalDate.parse(endDate.trim(), formatter());
     // System.out.println(start);
     // System.out.println(end);
@@ -57,7 +67,7 @@ public class ContractService {
     int duration = (int) (end.toEpochDay() - start.toEpochDay());
 
     int totalCreditRequired = duration * item.getPricePerDay();
-    if (totalCreditRequired > borrower.getCredits()) { 
+    if (totalCreditRequired > borrower.getCredits()) {
       return "Borrower does not have enough credits";
     } else {
       // saving the borrower with decremented credits.
@@ -86,23 +96,23 @@ public class ContractService {
     }
   }
 
-  @Scheduled (cron = "0 * * * * *")  // every minute
-  public void removeContract(){
-    LocalDate currentDate = LocalDate.now();
-    for(Contract contract : contractRepo.findAll()){
-       LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
-      
+  @Scheduled(cron = "0 * * * * *") // every minute
+  public void removeContract() {
+    // advance day check to check if the contract has to be deleted or not.
+    for (Contract contract : contractRepo.findAll()) {
+      LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
+
       // // Check if the current date is after or equal to the end date
-       if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
+      if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
         // Delete the contract if its end date has passed
         String id = contract.getId();
         deleteContract(id);
-    }
+      }
     }
   }
 
   public void deleteContract(String id) {
-    Contract contractDeletion = contractRepo.findById(id).orElse(null); 
+    Contract contractDeletion = contractRepo.findById(id).orElse(null);
     Item item = contractDeletion.getItem();
     item.setAvailable(true);
     itemRepo.save(item);
@@ -119,8 +129,25 @@ public class ContractService {
   // scheduling to delete contracts after the end date.
 
   // date formatter
-  public DateTimeFormatter formatter(){
+  public DateTimeFormatter formatter() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     return formatter;
+  }
+
+  public String advanceContractDay(String contractId, int days) {
+    Contract contract = contractRepo.findById(contractId).orElse(null);
+    if (contract == null) {
+      return "Contract not found!";
+    } else {
+      currentDate = currentDate.plusDays(days);
+      LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
+
+      if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
+        deleteContract(contractId);
+        return "Contract " + contractId + " has expired and was deleted.";
+      }
+    }
+    return "Contract " + contractId + " advanced by " + days + " day(s).";
+
   }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import com.backend.bakend.service.ContractService;
 import com.backend.bakend.service.ItemService;
 
 @RestController
+@RequestMapping("/itemContract")  // <-- Make sure this matches in Postman
 public class ItemController {
 
   @Autowired
@@ -39,6 +41,7 @@ public class ItemController {
     itemService.deleteItem(id);
   }
 
+  // adding a contract
   @PostMapping("/addContract/{borrowerId}/{itemId}/{startDate}/{endDate}")
   public String addContract(@PathVariable String borrowerId,
       @PathVariable String itemId,
@@ -51,4 +54,10 @@ public class ItemController {
   public void deleteContract(@PathVariable String id) {
     contractService.deleteContract(id);
   }
+
+  @PostMapping("/advanceDay/{contractId}/{days}")
+  public String advanceContractDay(@PathVariable String contractId, @PathVariable int days) {
+    return contractService.advanceContractDay(contractId, days);
+  }
+
 }
