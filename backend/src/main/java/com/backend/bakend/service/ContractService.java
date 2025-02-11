@@ -86,23 +86,26 @@ public class ContractService {
     }
   }
 
-  @Scheduled (cron = "0 0 * * * *")  // every day
+  @Scheduled (cron = "0 * * * * *")  // every minute
   public void removeContract(){
     LocalDate currentDate = LocalDate.now();
     for(Contract contract : contractRepo.findAll()){
-      LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
+      // LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
       
-      // Check if the current date is after or equal to the end date
-      if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
+      // // Check if the current date is after or equal to the end date
+      // if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
         // Delete the contract if its end date has passed
-        contractRepo.delete(contract);
-    }
+        String id = contract.getId();
+        deleteContract(id);
+    //}
     }
   }
 
   public void deleteContract(String id) {
     Contract contractDeletion = contractRepo.findById(id).orElse(null); 
-    contractDeletion.getItem().setAvailable(true);
+    Item item = contractDeletion.getItem();
+    item.setAvailable(true);
+    itemRepo.save(item);
     contractRepo.delete(contractDeletion);
   }
 
