@@ -42,8 +42,8 @@ public class ItemController {
   @PostMapping("/addContract/{borrowerId}/{itemId}/{startDate}/{endDate}")
   public String addContract(@PathVariable String borrowerId,
       @PathVariable String itemId,
-      @PathVariable int startDate,
-      @PathVariable int endDate) {
+      @PathVariable String startDate,
+      @PathVariable String endDate) {
     return contractService.addContract(borrowerId, itemId, startDate, endDate);
   }
 

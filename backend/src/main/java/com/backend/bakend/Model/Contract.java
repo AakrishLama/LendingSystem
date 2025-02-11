@@ -1,5 +1,6 @@
 package com.backend.bakend.Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,8 +15,8 @@ public class Contract {
   
   @Id
   private String id;
-  private int StartDate;
-  private int EndDate;
+  private String StartDate;
+  private String EndDate;
   private Item item;
   private User borrower;
   private User owner;

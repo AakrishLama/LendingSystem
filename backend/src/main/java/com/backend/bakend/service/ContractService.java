@@ -1,10 +1,12 @@
 package com.backend.bakend.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.backend.bakend.Model.Contract;
@@ -28,7 +30,7 @@ public class ContractService {
 
   private ArrayList<Contract> contracts = new ArrayList<>();
 
-  public String addContract(String borrowerId, String itemId, int startDate, int endDate) {
+  public String addContract(String borrowerId, String itemId, String startDate, String endDate) {
     // setting the borrower for the contract.
     Contract contract = new Contract();
     User borrower = userRepo.findById(borrowerId).orElse(null);
@@ -46,8 +48,16 @@ public class ContractService {
     if (item.isAvailable() != true) {
       return "Item is not available";
     }
-    int totalCreditRequired = (endDate - startDate) * item.getPricePerDay();
-    if (totalCreditRequired > borrower.getCredits()) {
+
+    LocalDate start = LocalDate.parse(startDate.trim(), formatter());    // trim to remove leading and ending spaces.
+    LocalDate end = LocalDate.parse(endDate.trim(), formatter());
+    // System.out.println(start);
+    // System.out.println(end);
+
+    int duration = (int) (end.toEpochDay() - start.toEpochDay());
+
+    int totalCreditRequired = duration * item.getPricePerDay();
+    if (totalCreditRequired > borrower.getCredits()) { 
       return "Borrower does not have enough credits";
     } else {
       // saving the borrower with decremented credits.
@@ -65,9 +75,7 @@ public class ContractService {
       contract.setStartDate(startDate);
       contract.setEndDate(endDate);
 
-      // date of contract creation
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-      String dateOfCreation = LocalDateTime.now().format(formatter);
+      String dateOfCreation = LocalDateTime.now().format(formatter());
       contract.setDateOfCreation(dateOfCreation);
 
       // saving the contract.
@@ -75,6 +83,20 @@ public class ContractService {
 
       contracts.add(contract);
       return "Contract created successfully";
+    }
+  }
+
+  @Scheduled (cron = "0 0 * * * *")  // every day
+  public void removeContract(){
+    LocalDate currentDate = LocalDate.now();
+    for(Contract contract : contractRepo.findAll()){
+      LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
+      
+      // Check if the current date is after or equal to the end date
+      if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
+        // Delete the contract if its end date has passed
+        contractRepo.delete(contract);
+    }
     }
   }
 
@@ -92,4 +114,10 @@ public class ContractService {
   // }
 
   // scheduling to delete contracts after the end date.
+
+  // date formatter
+  public DateTimeFormatter formatter(){
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    return formatter;
+  }
 }
