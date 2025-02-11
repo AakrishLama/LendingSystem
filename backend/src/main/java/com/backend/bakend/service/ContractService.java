@@ -90,14 +90,14 @@ public class ContractService {
   public void removeContract(){
     LocalDate currentDate = LocalDate.now();
     for(Contract contract : contractRepo.findAll()){
-      // LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
+       LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
       
       // // Check if the current date is after or equal to the end date
-      // if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
+       if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
         // Delete the contract if its end date has passed
         String id = contract.getId();
         deleteContract(id);
-    //}
+    }
     }
   }
 
