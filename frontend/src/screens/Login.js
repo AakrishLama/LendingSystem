@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 export default function Login() {
   return (
     <div>
-       <form>
+      <Navbar/>
+       <form className='my-2 container'>
         <div className="mb-3">
           
           <label htmlFor="email" className="form-label">Email</label>
