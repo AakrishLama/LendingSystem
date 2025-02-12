@@ -21,10 +21,10 @@ export default function Signup() {
         setCredentials({ name: "", email: "", password: "" })
       } else {
         console.log(response.status);
-        alert("Registration Failed");
+        alert("User already exists");
       }
-
     } catch (error) {
+      alert("Registration failed from server")
       console.error("Error:", error);
     }
 

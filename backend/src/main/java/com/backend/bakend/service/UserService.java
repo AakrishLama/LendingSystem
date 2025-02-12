@@ -22,6 +22,12 @@ public class UserService {
 
   public User addUser(User user) {
     // System.out.println(user.toString());
+    List<User> allUser = repo.findAll();
+    for (User u : allUser) {
+      if (u.getEmail().equals(user.getEmail())) {
+        throw new RuntimeException("User already exists");
+      }
+    }
     user.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     user.setCredits(100);
     return repo.save(user);
