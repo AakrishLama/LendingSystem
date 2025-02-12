@@ -9,15 +9,15 @@ export default function Carausel() {
       {/* Replacing  data-ride="carousel" and data-slide="prev"  with data-bs-ride="carousel" and data-bs-slide="prev"
       to make it compatible with bootstrap 5*/}
       <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
+        <div className="carousel-inner" style={{ height: "400px" }}>
           <div className="carousel-item active">
-            <img className="d-block w-100" src="/carauselPic/lending2.jpg" alt="First slide" />
+            <img className="d-block w-100" src="/carauselPic/lending2.jpg" alt="First slide" style={{height: "400px", objectFit: "cover", objectPosition: "center"}}/>
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src="/carauselPic/lending3.jpeg" alt="Second slide" />
+            <img className="d-block w-100" src="/carauselPic/lending3.jpeg" alt="Second slide" style={{height: "400px", objectFit: "cover", objectPosition: "center"}}/>
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src="/carauselPic/lending1.jpeg" alt="Third slide" />
+            <img className="d-block w-100" src="/carauselPic/lending1.jpeg" alt="Third slide" style={{height: "400px", objectFit: "cover", objectPosition: "center"}}/>
           </div>
         </div>
         <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
