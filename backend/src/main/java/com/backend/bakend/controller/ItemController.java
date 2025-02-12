@@ -3,6 +3,7 @@ package com.backend.bakend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.backend.bakend.Model.Item;
 import com.backend.bakend.service.ContractService;
 import com.backend.bakend.service.ItemService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/itemContract")  // <-- T0 Make sure this matches in Postman
 public class ItemController {

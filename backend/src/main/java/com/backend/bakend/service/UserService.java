@@ -33,4 +33,9 @@ public class UserService {
     return repo.save(user);
   }
 
+  public User findByEmail(String userEmail) {
+    return repo.findByEmail(userEmail);
+  }
+
+
 }
