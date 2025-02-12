@@ -17,7 +17,7 @@ import com.backend.bakend.service.ContractService;
 import com.backend.bakend.service.ItemService;
 
 @RestController
-@RequestMapping("/itemContract")  // <-- Make sure this matches in Postman
+@RequestMapping("/itemContract")  // <-- T0 Make sure this matches in Postman
 public class ItemController {
 
   @Autowired
