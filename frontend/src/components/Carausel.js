@@ -3,13 +3,10 @@ import React from 'react'
 export default function Carausel() {
   return (
     <div>
-      <div>
-        <h1>Carousel</h1>
-      </div>
       {/* Replacing  data-ride="carousel" and data-slide="prev"  with data-bs-ride="carousel" and data-bs-slide="prev"
       to make it compatible with bootstrap 5*/}
       <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner" style={{ height: "400px" }}>
+        <div className="carousel-inner" style={{ height: "400px"}}>
           <div className="carousel-item active">
             <img className="d-block w-100" src="/carauselPic/lending2.jpg" alt="First slide" style={{height: "400px", objectFit: "cover", objectPosition: "center"}}/>
           </div>
