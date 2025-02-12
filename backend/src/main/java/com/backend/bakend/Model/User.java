@@ -26,10 +26,8 @@ public class User {
   private ArrayList<String> items = new ArrayList<>();
 
 
-  public String getDate() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    date = LocalDateTime.now().format(formatter); // Get current date & time
-    return date;
+  public User() {
+    this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
   }
 
 }
