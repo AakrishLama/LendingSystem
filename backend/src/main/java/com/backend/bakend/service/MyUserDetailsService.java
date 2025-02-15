@@ -19,10 +19,10 @@ public class MyUserDetailsService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     // TODO Auto-generated method stub
     User user = repo.findByEmail(username);
-    System.out.println("Attempting to load user with email: " + username); // Add this debug line
+    System.out.println("Attempting to load user with email from myUserDetailsService: " + username); // Add this debug line
 
     if(user == null){
-      System.out.println("User not found with email: " + username); // Add this debug line
+      System.out.println("User not found with email from myUserDetailsService: " + username); // Add this debug line
 
       throw new UsernameNotFoundException("User not found");
     }

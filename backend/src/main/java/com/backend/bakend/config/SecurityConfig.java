@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -28,25 +29,19 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
     return http
-        .csrf(customizer -> customizer.disable())
-        .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
+        .csrf(customizer -> customizer.disable())         // disables cross site request forgery.
+        .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())  // any request is authenticated
         // .formLogin(Customizer.withDefaults()) //formlogin in browser
         .httpBasic(Customizer.withDefaults()) // allows postman to work.
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .build();
   }
 
-  @SuppressWarnings("deprecation")
   @Bean
   public AuthenticationProvider authenticationProvider() {
-    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();   //A built-in authentication provider that retrieves user details from UserDetailsService and validates the password.
+    provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
     provider.setUserDetailsService(userDetailsService());
     return provider;
   }
-
-  // @Bean
-  // public UserDetailsService userDetailsService() {
-  // return new InMemoryUserDetailsManager();
-  // }
 }

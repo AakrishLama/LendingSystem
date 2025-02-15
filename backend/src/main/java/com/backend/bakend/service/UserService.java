@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.backend.bakend.Model.User;
@@ -15,6 +16,9 @@ public class UserService {
 
   @Autowired
   UserRepository repo;
+
+  private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
 
   public List<User> getAllUsers() {
     return repo.findAll();
@@ -30,6 +34,8 @@ public class UserService {
     }
     user.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     user.setCredits(100);
+    // using bcrypt hash to save the password.
+    user.setPassword(encoder.encode(user.getPassword()));
     return repo.save(user);
   }
 
