@@ -5,9 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.backend.bakend.Model.Login;
 import com.backend.bakend.Model.User;
 import com.backend.bakend.repo.UserRepository;
 
@@ -17,8 +22,10 @@ public class UserService {
   @Autowired
   UserRepository repo;
 
-  private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+  @Autowired
+  AuthenticationManager authManager;
 
+  private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
   public List<User> getAllUsers() {
     return repo.findAll();
@@ -39,8 +46,17 @@ public class UserService {
     return repo.save(user);
   }
 
-  public User findByEmail(String userEmail) {
-    return repo.findByEmail(userEmail);
+  // public User findByEmail(String userEmail) {
+  // return repo.findByEmail(userEmail);
+  // }
+  public String verify(Login loginUser) {
+    // System.out.println("Authenticating: " + loginUser.getEmail());
+    Authentication authentication = authManager
+        .authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
+    if (authentication.isAuthenticated()) {
+      return "Login successful";
+    } else {
+      return "Login failed";
+    }
   }
-
 }
