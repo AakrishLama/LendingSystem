@@ -32,31 +32,39 @@ public class UserController {
   @GetMapping("/")
   // get the session ID from the HttpServletRequest.
   public String greet(HttpServletRequest http) {
-    return "Hello World! after a while "+ http.getSession().getId();
+    return "Hello World! after a while " + http.getSession().getId();
   }
 
   @GetMapping("/user")
   public List<User> user() {
     return userService.getAllUsers();
   }
+
   @GetMapping("/csrf")
   public CsrfToken csrf(HttpServletRequest request) {
     return (CsrfToken) request.getAttribute("_csrf");
   }
 
+  @GetMapping("/test")
+  public String test() {
+    System.out.println("Test endpoint reached");
+    return "Test endpoint reached";
+  }
+
   @PostMapping("/addUser")
   public ResponseEntity<User> addUser(@RequestBody User user) {
+    System.out.println("Received request to add user: " + user.getEmail()); // Debug log
     return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
   }
 
   @GetMapping("/login")
   public ResponseEntity<Object> login(@RequestBody Login login) {
     User user = userService.findByEmail(login.getEmail());
-    if(user == null){
+    if (user == null) {
       response.put("message", "User not found");
       return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-    if(!user.getPassword().equals(login.getPassword())){
+    if (!user.getPassword().equals(login.getPassword())) {
       response.put("message", "Incorrect Password");
       return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
@@ -64,4 +72,3 @@ public class UserController {
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 }
- 
