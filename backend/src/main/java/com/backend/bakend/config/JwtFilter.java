@@ -31,8 +31,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
   @Autowired
   private JwtService jwtService;
+
   @Autowired
-  @Qualifier("myUserDetailsService") // 👈 Add this to specify the exact bean
+  @Qualifier("myUserDetailsService") 
   private MyUserDetailsService myUserDetailsService;
 
   @Override
