@@ -17,7 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
   private UserRepository repo;
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    // TODO Auto-generated method stub
+
     User user = repo.findByEmail(username);
     System.out.println("Attempting to load user with email from myUserDetailsService: " + username); // Add this debug line
 

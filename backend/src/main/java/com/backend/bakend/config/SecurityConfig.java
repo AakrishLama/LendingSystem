@@ -1,5 +1,6 @@
 package com.backend.bakend.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,12 +14,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.backend.bakend.service.MyUserDetailsService; 
+import com.backend.bakend.service.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+  @Autowired
+  private JwtFilter jwtFilter;
 
   @Bean
   public UserDetailsService userDetailsService() {
@@ -37,6 +42,7 @@ public class SecurityConfig {
         // .formLogin(Customizer.withDefaults()) //formlogin in browser
         .httpBasic(Customizer.withDefaults()) // allows postman to work.
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
 
