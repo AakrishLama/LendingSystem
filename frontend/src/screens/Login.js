@@ -1,9 +1,11 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import { useState } from 'react';
+import {useNavigate} from "react-router-dom"
 
 export default function Login() {
 
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", password: "" })
 
   const handleSubmit = async (e) => {
@@ -17,14 +19,21 @@ export default function Login() {
         body: JSON.stringify({ email: credentials.email, password: credentials.password })
       })
       if (response.status === 200) {
+        // get the token from response and save it in localstorage for future use.
         const token = await response.text();
-        console.log("success", token);
         localStorage.setItem("token", token);
         setCredentials({ email: "", password: "" })
+
+        console.log("token", localStorage.getItem("token"))
         alert("Login successFull.")
+        navigate("/");
+      }else{
+        console.log( "response status",  response.status);
+        alert("Invalid credentials");
       }
     }
     catch (error) {
+      alert("Login failed from server");
       console.error("Error:", error);
     }
   }
