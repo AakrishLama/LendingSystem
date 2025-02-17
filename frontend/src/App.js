@@ -10,6 +10,7 @@ import '../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Home from './screens/Home';
+import AddItem from './screens/AddItem';
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path = "/" element = {<Home/>}> </Route>
         <Route path= "/signup" element= {<Signup/>} />
         <Route path= "/login" element= {<Login/>} />
+        <Route path = "addItem" element = {<AddItem/>}> </Route>
       </Routes>
     </Router>
   );

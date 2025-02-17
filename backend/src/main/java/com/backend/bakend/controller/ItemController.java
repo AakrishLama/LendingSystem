@@ -28,8 +28,8 @@ public class ItemController {
   @Autowired
   ContractService contractService;
 
-  @PostMapping("/addItem")
-  public Item addItem(@RequestBody Item item, @RequestParam String ownerId) {
+  @PostMapping("/addItem/{ownerId}")
+  public Item addItem(@RequestBody Item item, @PathVariable String ownerId) {
     return itemService.addItem(item, ownerId);
   }
 

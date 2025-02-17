@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -26,16 +26,17 @@ export default function Navbar() {
               </li>
             </ul>
             {(localStorage.getItem("token")) ? <>
-              <Link className="btn btn-outline-success me-2 border-3 fw-bold text-black" type="submit" to="/"
-               style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>Add Item</Link>
-              <Link className="btn btn-outline-success me-2 border-3 fw-bold text-black" type="submit" to="/"
-               style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }} onClick={logout}>Log out</Link>
+              <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/AddItem"
+                style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>Add Item</Link>
+              <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/"
+                style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}
+                onClick={logout}>Log out</Link>
             </>
               : <>
-                <Link className="btn btn-outline-success me-2 border-3 fw-bold text-black" type="submit" to="/Login"
-                 style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>Log in</Link>
-                <Link className="btn btn-outline-success me-2 border-3 fw-bold text-black" type="submit" to="/Signup"
-                 style={{ backgroundColor: "lightblue", textAlign: "center" }}>Sign up</Link>
+                <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/Login"
+                  style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>Log in</Link>
+                <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/Signup"
+                  style={{ backgroundColor: "lightblue", textAlign: "center" }}>Sign up</Link>
               </>
             }
           </div>

@@ -37,7 +37,8 @@ public class SecurityConfig {
         .csrf(customizer -> customizer.disable()) // disabling cross site request forgery.
         .authorizeHttpRequests(requests -> requests
             // authentication required for routes other than login, addUser and test.
-            .requestMatchers("/addUser", "/login", "/test").permitAll()
+            .requestMatchers("/addUser", "/login").permitAll()
+            .requestMatchers("/itemContract/**").authenticated()
             .anyRequest().authenticated())
         // .formLogin(Customizer.withDefaults()) //formlogin in browser
         .httpBasic(Customizer.withDefaults()) // allows postman to work.
