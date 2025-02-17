@@ -19,9 +19,7 @@ public class Item {
   private String date;
   private Category category;
   private boolean available = true;
-
-
-  private String ownerId;
+  private String ownerName;
 
   public String getDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
