@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.bakend.Model.AuthResponse;
 import com.backend.bakend.Model.Login;
 import com.backend.bakend.Model.User;
 import com.backend.bakend.service.UserService;
@@ -22,6 +23,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
+
+
 
   @Autowired
   UserService userService;
@@ -57,7 +60,7 @@ public class UserController {
     return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
   }
 
-  // @GetMapping("/login")
+  // @GetMapping("/login") Manual checking without token.
   // public ResponseEntity<Object> login(@RequestBody Login login) {
     // User user = userService.findByEmail(login.getEmail());
     // if (user == null) {
@@ -71,9 +74,10 @@ public class UserController {
     // response.put("message", "Login successful");
     // return new ResponseEntity<>(user, HttpStatus.OK);
   // }
-
+ 
   @PostMapping("/login")
-  public String login(@RequestBody Login loginUser) {
-    return userService.verify(loginUser);
+  public ResponseEntity<AuthResponse> login(@RequestBody Login loginUser) {
+      AuthResponse authResponse = userService.verify(loginUser);
+      return ResponseEntity.ok(authResponse);
   }
 }

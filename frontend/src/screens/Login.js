@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{  useState, useContext } from 'react';
 import Navbar from '../components/Navbar'
-import { useState } from 'react';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
+import  AuthContext  from '../components/AuthContext';
 
 export default function Login() {
 
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", password: "" })
+  const { login } = useContext(AuthContext); // Use context to update authentication state
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -20,11 +22,14 @@ export default function Login() {
       })
       if (response.status === 200) {
         // get the token from response and save it in localstorage for future use.
-        const token = await response.text();
-        localStorage.setItem("token", token);
+        const data = await response.json();
+        login(data.user, data.token);
+        // localStorage.setItem("token", data.token);
+        // localStorage.setItem("user", JSON.stringify(data.user));
         setCredentials({ email: "", password: "" })
-
-        console.log("token", localStorage.getItem("token"))
+ 
+         console.log("token", sessionStorage.getItem("token"))
+         console.log("user", sessionStorage.getItem("user"))
         alert("Login successFull.")
         navigate("/");
       }else{

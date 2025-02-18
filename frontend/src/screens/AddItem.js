@@ -1,17 +1,22 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import {useState} from "react"
+import {useState, useContext} from "react"
+import AuthContext from '../components/AuthContext'
 
 
 // i need current user ID, Token.
 
 export default function AddItem() {
 const [item, setItem] = useState({name:"", description: "", pricePerDay: 10, category: "", available: true})
+const {user, token} = useContext(AuthContext);
+
+console.log(user.id);
+console.log(token);
 
 const handleChange = (event) => {
   setItem({...item, [event.target.name]: event.target.value})
 }
-const handleSubmit = (event) => {
+const handleSubmit = async(event) => {
   event.preventDefault()
   // console.log(item)
 }

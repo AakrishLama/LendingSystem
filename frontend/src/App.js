@@ -11,18 +11,21 @@ import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Home from './screens/Home';
 import AddItem from './screens/AddItem';
+import { AuthProvider } from './components/AuthContext';
 
 
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path = "/" element = {<Home/>}> </Route>
-        <Route path= "/signup" element= {<Signup/>} />
-        <Route path= "/login" element= {<Login/>} />
-        <Route path = "addItem" element = {<AddItem/>}> </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home />}> </Route>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="addItem" element={<AddItem />}> </Route>
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 }

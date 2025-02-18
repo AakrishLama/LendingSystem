@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.backend.bakend.Model.AuthResponse;
 import com.backend.bakend.Model.Login;
 import com.backend.bakend.Model.User;
 import com.backend.bakend.repo.UserRepository;
@@ -20,7 +21,7 @@ public class UserService {
 
   @Autowired
   UserRepository repo;
- 
+
   @Autowired
   AuthenticationManager authManager;
 
@@ -48,17 +49,20 @@ public class UserService {
     return repo.save(user);
   }
 
-  // public User findByEmail(String userEmail) {
-  // return repo.findByEmail(userEmail);
-  // }
-  public String verify(Login loginUser) {
+  public User findByEmail(String userEmail) {
+    return repo.findByEmail(userEmail);
+  }
+
+  public AuthResponse verify(Login loginUser) {
     // System.out.println("Authenticating: " + loginUser.getEmail());
     Authentication authentication = authManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
     if (authentication.isAuthenticated()) {
-      return jwtService.generateToken(loginUser.getEmail());
+      User user = findByEmail(loginUser.getEmail());
+      String token = jwtService.generateToken(user.getEmail());
+      return new AuthResponse(user, token);
     } else {
-      return "Login failed";
+      return new AuthResponse(null, null);
     }
   }
 }

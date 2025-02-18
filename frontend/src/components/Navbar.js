@@ -1,13 +1,11 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import AuthContext from "../components/AuthContext"
 
 export default function Navbar() {
-  const navigate = useNavigate();
+  const { logout} = useContext(AuthContext);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "lightblue" }}>
@@ -25,7 +23,7 @@ export default function Navbar() {
                 <Link className="nav-link active" to="/">About</Link>
               </li>
             </ul>
-            {(localStorage.getItem("token")) ? <>
+            {(sessionStorage.getItem("token")) ? <>
               <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/AddItem"
                 style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>Add Item</Link>
               <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/"
