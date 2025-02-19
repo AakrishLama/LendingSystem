@@ -33,13 +33,17 @@ public class JwtFilter extends OncePerRequestFilter {
   private JwtService jwtService;
 
   @Autowired
-  @Qualifier("myUserDetailsService") 
+  @Qualifier("myUserDetailsService")
   private MyUserDetailsService myUserDetailsService;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
+    System.out.println("Incoming Request: " + request.getRequestURI()); // Log request URI
+
     String authHeader = request.getHeader("Authorization");
+    System.out.println("Authorization Header: " + authHeader); // Log Authorization header
+
     String token = null;
     String username = null;
     System.out.println("Incoming Request: " + request.getRequestURI()); // Log request URI
@@ -47,18 +51,19 @@ public class JwtFilter extends OncePerRequestFilter {
     if (authHeader != null && authHeader.startsWith("Bearer ")) {
       token = authHeader.substring(7);
       username = jwtService.extractUsername(token);
+      System.out.println("Extracted Token: " + token);
     }
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+      UserDetails userDetails = myUserDetailsService.loadUserByUsername(username); 
       if (jwtService.validateToken(token, userDetails)) {
         System.out.println("Token validated successfully.");
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null,
             userDetails.getAuthorities());
         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authToken);
-        //debug
+        // debug
         System.out.println("Authentication set: " + SecurityContextHolder.getContext().getAuthentication());
-      }else{
+      } else {
         System.out.println("Token validation failed.");
       }
     }

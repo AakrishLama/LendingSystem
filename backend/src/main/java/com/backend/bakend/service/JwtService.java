@@ -60,16 +60,16 @@ public class JwtService {
   private boolean isTokenExpired(String token) {
     return extractExpiration(token).before(new Date());
   }
-
+ 
   private Date extractExpiration(String token) {
     return extractClaim(token, Claims::getExpiration);
   }
 
   private Claims extractAllClaims(String token) {
-    JwtParser parser = Jwts.parser() //  Use `parser` instead of `parserBuilder`
-        .verifyWith(getKey()) //  Verify the token with the secret key
+    JwtParser parser = Jwts.parser() // 🔧 Use `parser` instead of `parserBuilder`
+        .verifyWith(getKey())         // � Verify the token with the secret key
         .build();
-    return parser.parseSignedClaims(token).getPayload();
+        return parser.parseSignedClaims(token).getPayload();
 
   }
 

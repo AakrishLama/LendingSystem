@@ -2,6 +2,7 @@ package com.backend.bakend.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class UserService {
     user.setCredits(100);
     // using bcrypt hash to save the password.
     user.setPassword(encoder.encode(user.getPassword()));
+    user.setRoles(Arrays.asList("USER"));
     return repo.save(user);
   }
 
@@ -60,7 +62,7 @@ public class UserService {
     if (authentication.isAuthenticated()) {
       User user = findByEmail(loginUser.getEmail());
       String token = jwtService.generateToken(user.getEmail());
-      return new AuthResponse(user, token);
+      return new AuthResponse(user, token); 
     } else {
       return new AuthResponse(null, null);
     }

@@ -33,12 +33,12 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
 
-    return http
+    return http.cors().and()
         .csrf(customizer -> customizer.disable()) // disabling cross site request forgery.
         .authorizeHttpRequests(requests -> requests
             // authentication required for routes other than login, addUser and test.
             .requestMatchers("/addUser", "/login").permitAll()
-            .requestMatchers("/itemContract/**").authenticated()
+            .requestMatchers("/itemContract/**").hasAuthority("ROLE_USER")
             .anyRequest().authenticated())
         // .formLogin(Customizer.withDefaults()) //formlogin in browser
         .httpBasic(Customizer.withDefaults()) // allows postman to work.
@@ -46,6 +46,7 @@ public class SecurityConfig {
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
+  
 
   @Bean
   public AuthenticationProvider authenticationProvider() {
