@@ -20,6 +20,17 @@ public class Item {
   private Category category;
   private boolean available = true;
   private String ownerName;
+  // Images
+  private String imageName;
+  private String imageType;
+  private byte[] imageData;
+
+  public Item() {
+    this.imageName = null;
+    this.imageType = null;
+    this.imageData = null;
+}
+
 
   public String getDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

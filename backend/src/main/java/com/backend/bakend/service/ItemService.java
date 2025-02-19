@@ -1,10 +1,12 @@
 package com.backend.bakend.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.backend.bakend.Model.Item;
 import com.backend.bakend.Model.User;
@@ -19,7 +21,7 @@ public class ItemService {
   @Autowired
   UserRepository userRepo;
 
-  public Item addItem(Item item, String ownerId) {
+  public Item addItem(Item item, String ownerId, MultipartFile imageFile) throws IOException {
     User owner = userRepo.findById(ownerId).orElse(null);
     if (owner == null) {
       throw new RuntimeException("Owner not found");
