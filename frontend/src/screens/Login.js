@@ -25,7 +25,7 @@ export default function Login() {
         const data = await response.json();
         login(data.user, data.token);
         // localStorage.setItem("token", data.token);
-        // localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("user", JSON.stringify(data.user));
         setCredentials({ email: "", password: "" })
  
          console.log("token", sessionStorage.getItem("token"))

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import AuthContext from "../components/AuthContext"
 
 export default function Navbar() {
-  const { logout} = useContext(AuthContext);
+  const { logout,user} = useContext(AuthContext);
+
 
 
   return (
@@ -29,6 +30,8 @@ export default function Navbar() {
               <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/"
                 style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}
                 onClick={logout}>Log out</Link>
+                <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/myProfile"
+                style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>{user.name}</Link>
             </>
               : <>
                 <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/Login"

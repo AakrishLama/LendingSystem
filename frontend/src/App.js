@@ -12,6 +12,7 @@ import Login from './screens/Login';
 import Home from './screens/Home';
 import AddItem from './screens/AddItem';
 import { AuthProvider } from './components/AuthContext';
+import MyProfile from './screens/MyProfile';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="addItem" element={<AddItem />}> </Route>
+          <Route path="/myProfile" element={<MyProfile />}> </Route>
         </Routes>
       </AuthProvider>
     </Router>

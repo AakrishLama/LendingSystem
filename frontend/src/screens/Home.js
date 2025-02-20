@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Carausel from '../components/Carausel'
 import Cards from '../components/Cards'
 
 
 export default function Home() {
-  
+  const [items, setItems] = useState([]);
+
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -19,7 +20,9 @@ export default function Home() {
         });
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data);
+          // console.log(data.length);
+          console.log("data[0] ",data[0])
+          setItems(data);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -28,16 +31,16 @@ export default function Home() {
 
     fetchItems();
   },[] ); 
+  console.log("items ", items);
 
 
   return (
     <div>
       <Navbar />
       <Carausel />
-      <Cards />
-      <Cards />
-      <Cards />
-      <Cards />
+      {items.map((item) => (
+        <Cards key={item.id} item={item} />
+      ))}
     </div>
   )
 }
