@@ -39,10 +39,10 @@ export default function AddItem() {
       formData.append("available", item.available ? "true" : "false");
       formData.append("image", item.image);
 
-      console.log("Form Data:")
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
-      }
+      // console.log("Form Data:")
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + ': ' + pair[1]);
+      // }
       console.log("Image File:", item.image ? item.image.name : "No image selected");
       console.log("Image Type:", item.image ? item.image.type : "No image selected");
       console.log(formData.get("available"));

@@ -36,8 +36,8 @@ public class SecurityConfig {
     return http.cors().and()
         .csrf(customizer -> customizer.disable()) // disabling cross site request forgery.
         .authorizeHttpRequests(requests -> requests
-            // authentication required for routes other than login, addUser and test.
-            .requestMatchers("/addUser", "/login").permitAll()
+            // authentication required for routes other than login, addUser.
+            .requestMatchers("/addUser", "/login","/itemContract/items").permitAll()
             .requestMatchers("/itemContract/**").hasAuthority("ROLE_USER")
             .anyRequest().authenticated())
         // .formLogin(Customizer.withDefaults()) //formlogin in browser
