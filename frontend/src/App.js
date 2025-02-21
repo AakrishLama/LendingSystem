@@ -16,7 +16,6 @@ import MyProfile from './screens/MyProfile';
 import ItemDetails from './screens/ItemDetails';
 import { ItemsProvider } from './components/ItemsContext';
 import About from './screens/About.js';
- 
 
 
 function App() {

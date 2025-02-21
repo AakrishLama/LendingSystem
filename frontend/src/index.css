@@ -11,3 +11,81 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* .toggle-btn {
+  background-color: rgb(54, 59, 60);
+  border: 1px solid rgb(13, 15, 15);
+  border-radius: 99px;
+  height: 28px;
+  width: 50px;
+  transition: background-color 0.3s ease, border-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.toggle-btn .thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: rgb(46, 43, 45);
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: left 0.3s ease;
+}
+
+.toggle-btn.toggle {
+  background-color: rgb(176, 184, 190);
+}
+
+.toggle-btn:hover {
+  border-color: royalblue;
+}
+
+.toggle-btn.toggle .thumb {
+  left: calc(50px - 27px);
+}
+
+/* .toggle-btn {
+  background-color: rgb(41, 169, 205);
+  border: 1px solid rgb(13, 15, 15);
+  border-radius: 99px;
+  height: 28px; 
+  width: 50px;
+  transition: background-color 0.1s ease, border-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.toggle-btn .thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 99px;
+  border-color: black;
+  background-color: rgb(243, 241, 242);
+  transform: translateX(0px);
+  transition: left 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+}
+.toggle-btn.toggle{
+  background-color: rgb(155, 189, 217); 
+}
+.toggle-btn:hover{
+  border-color: royalblue;
+}
+.toggle-btn.toggle .thumb{
+  left: calc(50px - 25px);
+} */ 

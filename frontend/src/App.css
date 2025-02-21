@@ -1,45 +1,65 @@
-.App {
-  text-align: center;
+/* Default Light Mode */
+body {
+  background-color: white;
+  color: black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.dark-mode .navbar {
+  background-color: #222 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dark-mode .btn {
+  background-color: #444 !important;
+  border-color: white;
 }
-.card-text-description{
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limit the number of lines to 3 */
-  -webkit-box-orient: vertical;
-  overflow: hidden; /* Hide the overflow */
-  text-overflow: ellipsis; /* Optional: add ellipsis (...) */
+
+.dark-mode .btn:hover {
+  background-color: #555 !important;
+}
+
+.toggle-btn {
+  background-color: rgb(41, 169, 205);
+  border: 1px solid black;
+  border-radius: 99px;
+  height: 28px;
+  width: 50px;
+  transition: background-color 0.3s ease, border-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.toggle-btn .thumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: rgb(243, 241, 242);
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 24px;
+  transition: left 0.3s ease;
+}
+
+.toggle-btn.toggle .thumb {
+  left: calc(50px - 27px);
+}
+
+.toggle-btn.toggle {
+  background-color: rgb(155, 189, 217);
 }
