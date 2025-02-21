@@ -1,11 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useItemsContext } from '../components/ItemsContext';
 
 export default function Cards({ item }) {
+  const { setSelectedItem } = useItemsContext();  // Get the setSelectedItem function
+  
   // Construct the Base64 image URL properly
   const imageDataURL = item.imageData && item.imageType
     ? `data:${item.imageType};base64,${item.imageData}`
     : null;
+
+    const handleItemClick = () => {
+      setSelectedItem(item);  // Set the selected item when clicked
+    };
   return (
     <div>
       <div className="my-2 mx-2 card" style={{ width: "18rem" }}>
@@ -17,8 +24,10 @@ export default function Cards({ item }) {
           <p className="card-text"> category = {item.category}</p>
           <p className="card-text"> price = {item.pricePerDay}</p>
           <p className="card-text"> owner = {item.ownerName}</p>
+          <p className="card-text"> available = {item.available? "yes" : "no"}</p>
 
-          <Link to="/ItemDetails" className="btn btn-primary">Open view</Link>
+
+          <Link to="/ItemDetails" className="btn btn-primary" onClick={handleItemClick} >Open view</Link>
         </div>
       </div>
     </div>

@@ -14,21 +14,26 @@ import AddItem from './screens/AddItem';
 import { AuthProvider } from './components/AuthContext';
 import MyProfile from './screens/MyProfile';
 import ItemDetails from './screens/ItemDetails';
-
+import { ItemsProvider } from './components/ItemsContext';
+import About from './screens/About.js';
+ 
 
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />}> </Route>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="addItem" element={<AddItem />}> </Route>
-          <Route path="/myProfile" element={<MyProfile />}> </Route>
-          <Route path="/ItemDetails" element={<ItemDetails />}> </Route>
-        </Routes>
+        <ItemsProvider>
+          <Routes>
+            <Route path="/" element={<Home />}> </Route>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="addItem" element={<AddItem />}> </Route>
+            <Route path="/myProfile" element={<MyProfile />}> </Route>
+            <Route path="/ItemDetails" element={<ItemDetails />}> </Route>
+            <Route path="/About" element={<About />}></Route>
+          </Routes>
+        </ItemsProvider>
       </AuthProvider>
     </Router>
   );

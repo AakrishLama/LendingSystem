@@ -4,7 +4,7 @@ import AuthContext from "../components/AuthContext"
 
 export default function Navbar() {
   const { logout} = useContext(AuthContext);
-  const userName = JSON.parse(sessionStorage.getItem("user")).name;
+
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default function Navbar() {
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" to="/">About</Link>
+                <Link className="nav-link active" to="/About">About</Link>
               </li>
             </ul>
             {(sessionStorage.getItem("token")) ? <>
@@ -30,7 +30,7 @@ export default function Navbar() {
                 style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}
                 onClick={logout}>Log out</Link>
                <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/myProfile"
-                style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>{userName}</Link> 
+                style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black" }}>{JSON.parse(sessionStorage.getItem("user")).name}</Link> 
             </>
               : <>
                 <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/Login"
