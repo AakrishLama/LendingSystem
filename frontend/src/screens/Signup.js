@@ -37,23 +37,31 @@ export default function Signup() {
   }
   return (
     <>
-      <Navbar/>
-      <div className="my-2 container">
+      <Navbar />
+      <div className="my-5 container border border-2 p-3">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">User Name</label>
-            <input type="text" className="form-control" id="name" aria-describedby="emailHelp" value={credentials.name} onChange={(e) => { setCredentials({ ...credentials, name: e.target.value }) }} />
+            <input type="text" className="form-control" id="name" aria-describedby="emailHelp"
+              value={credentials.name}
+              onChange={(e) => { setCredentials({ ...credentials, name: e.target.value }) }} required />
             <br></br>
             <label htmlFor="email" className="form-label">Email</label>
-            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={credentials.email} onChange={(e) => { setCredentials({ ...credentials, email: e.target.value }) }} />
+            <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
+              value={credentials.email}
+              onChange={(e) => { setCredentials({ ...credentials, email: e.target.value }) }} required />
             <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-            <input type="password" className="form-control" id="exampleInputPassword1" value={credentials.password} onChange={(e) => { setCredentials({ ...credentials, password: e.target.value }) }} />
+            <input type="password" className="form-control" id="exampleInputPassword1"
+              value={credentials.password}
+              onChange={(e) => { setCredentials({ ...credentials, password: e.target.value }) }} required />
           </div>
 
-          <button type="submit" className="btn btn-primary" >Submit</button>
+          <div className='container justify-content-center text-center'>
+            <button type="submit" className="btn btn-success">Submit</button>
+          </div>
         </form >
       </div>
     </>

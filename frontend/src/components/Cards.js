@@ -16,7 +16,7 @@ export default function Cards({ item }) {
   return (
     <div>
       <div className="my-2 mx-2 card" style={{ width: "18rem" }}>
-        <img src={imageDataURL ? imageDataURL : "/logo192.png"}
+        <img src={imageDataURL ? imageDataURL : "/carauselPic/pic2.png"}
           className="card-img-top" alt="..." style={{ height: "120px", objectFit: "fill" }} />
         <div className="card-body">
           <h5 className="card-title">{item.name}</h5>

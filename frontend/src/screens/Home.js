@@ -12,20 +12,21 @@ export default function Home() {
       <div>
         <Navbar />
         <Carausel />
-        {itemsCat.map((category) => (
-          <div>
-            <h2 className='text-center'>{category}</h2>
-            <hr></hr>
-            <div className="row">
-              {items.filter((item) => item.category === category).map((item) => (
-                <div className="col-12 col-md-6 col-lg-3" >
-                  <Cards key={item.id} item={item} />
-                </div>
-              ))}
+
+          {itemsCat.map((category) => (
+            <div>
+              <h2 className='text-center'>{category}</h2>
+              <hr></hr>
+              <div className="row">
+                {items.filter((item) => item.category === category).map((item) => (
+                  <div className="col-12 col-md-6 col-lg-3" >
+                    <Cards key={item.id} item={item} />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
     </>
   )
 }
