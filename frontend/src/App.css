@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+.card-text-description{
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit the number of lines to 3 */
+  -webkit-box-orient: vertical;
+  overflow: hidden; /* Hide the overflow */
+  text-overflow: ellipsis; /* Optional: add ellipsis (...) */
+}

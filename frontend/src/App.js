@@ -13,6 +13,7 @@ import Home from './screens/Home';
 import AddItem from './screens/AddItem';
 import { AuthProvider } from './components/AuthContext';
 import MyProfile from './screens/MyProfile';
+import ItemDetails from './screens/ItemDetails';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="addItem" element={<AddItem />}> </Route>
           <Route path="/myProfile" element={<MyProfile />}> </Route>
+          <Route path="/ItemDetails" element={<ItemDetails />}> </Route>
         </Routes>
       </AuthProvider>
     </Router>

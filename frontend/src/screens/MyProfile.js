@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import AuthContext from "../components/AuthContext"; // Import AuthContext
 
+
+// use the server to get the user so only authenticated users can see their profile.
 export default function MyProfile() {
   const { user } = useContext(AuthContext); // Get user from context
 
