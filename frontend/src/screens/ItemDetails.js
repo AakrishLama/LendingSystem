@@ -8,6 +8,7 @@ export default function ItemDetails() {
   if (!selectedItem) {
     return (
       <div>
+        <Navbar/>
         <p>no item selected</p>
       </div>
     )

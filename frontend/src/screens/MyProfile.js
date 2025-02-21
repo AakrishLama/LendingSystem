@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import AuthContext from "../components/AuthContext"; // Import AuthContext
+import Navbar from "../components/Navbar";
 
 
 // use the server to get the user so only authenticated users can see their profile.
@@ -11,18 +12,21 @@ export default function MyProfile() {
   }
   console.log(user);
   return (
-    <div className="my-2 container">
-      <h2>My Profile</h2>
-      <p> name = {user.name}</p>
-      <p>email = {user.email}</p>
-      <p>credits = {user.credits}</p>
-      <p>date = {user.date}</p>
-      {user.items.map((item) => (
-        <p>item = {item}</p>
-      ))}
-      <button>Update Profile</button>
+    <>
+    <Navbar/>
+      <div className="my-2 container">
+        <h2>My Profile</h2>
+        <p> name = {user.name}</p>
+        <p>email = {user.email}</p>
+        <p>credits = {user.credits}</p>
+        <p>date = {user.date}</p>
+        {user.items.map((item) => (
+          <p>item = {item}</p>
+        ))}
+        <button>Update Profile</button>
 
-    </div>
+      </div>
+    </>
   );
 }
 

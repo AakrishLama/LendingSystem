@@ -19,22 +19,22 @@ export default function SideBar({ showSidebar, closeSideBar }) {
           </div>
           <br></br>
           <div className='fs-5  text-black border border-2 w-100 text-center'>
-            <Link className="mx-5 sidebar-brand fw-bold text-center text-black"><IoMdHome />
+            <Link className="mx-5 sidebar-brand fw-bold text-center text-black" to="/"><IoMdHome />
               Home</Link>
           </div>
           <br></br>
           <div className='fs-5  text-black border border-2 w-100 text-center'>
-            <Link className="mx-5 sidebar-brand fw-bold text-center text-black"><FcAbout />
+            <Link className="mx-5 sidebar-brand fw-bold text-center text-black" to="/About"><FcAbout />
               About</Link>
           </div>
           <br></br>
           <div className='fs-5  text-black border border-2 w-100 text-center'>
-            <Link className="mx-5 sidebar-brand fw-bold text-center text-black"><CgProfile />
+            <Link className="mx-5 sidebar-brand fw-bold text-center text-black" to="/MyProfile"><CgProfile />
               My Profile</Link>
           </div>
           <br></br>
           <div className='fs-5  text-black border border-2 w-100 text-center'>
-            <Link className="mx-5 sidebar-brand fw-bold text-center text-black"><CiCircleList />
+            <Link className="mx-5 sidebar-brand fw-bold text-center text-black" to="/ItemDetails"><CiCircleList />
               My Items</Link>
           </div>
           <br></br>
