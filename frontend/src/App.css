@@ -63,3 +63,27 @@ body.dark-mode {
 .toggle-btn.toggle {
   background-color: rgb(54, 56, 57);
 }
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Start off-screen */
+  width: 250px;
+  height: 100%;
+  background-color: lightblue;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0; /* Bring sidebar on-screen */
+}
+
+/* Shift main content when sidebar is open */
+.main-content {
+  transition: margin-right 0.3s ease;
+}
+
+.sidebar.open ~ .main-content {
+  margin-right: 250px; /* Shift main content to the right */
+}

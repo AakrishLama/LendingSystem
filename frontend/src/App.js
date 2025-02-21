@@ -16,7 +16,7 @@ import MyProfile from './screens/MyProfile';
 import ItemDetails from './screens/ItemDetails';
 import { ItemsProvider } from './components/ItemsContext';
 import About from './screens/About.js';
-
+import SideBar from './components/SideBar';
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
             <Route path="/myProfile" element={<MyProfile />}> </Route>
             <Route path="/ItemDetails" element={<ItemDetails />}> </Route>
             <Route path="/About" element={<About />}></Route>
+            <Route path="/SideBar" element={<SideBar />}> </Route>
           </Routes>
         </ItemsProvider>
       </AuthProvider>
