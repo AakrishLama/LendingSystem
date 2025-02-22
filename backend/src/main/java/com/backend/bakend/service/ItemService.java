@@ -43,6 +43,7 @@ public class ItemService {
     return itemRepo.save(item);
   }
 
+  // get all items.
   public List<Item> getAllItems() {
     return itemRepo.findAll();
   }

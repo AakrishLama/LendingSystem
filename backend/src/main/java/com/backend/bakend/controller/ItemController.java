@@ -21,19 +21,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.backend.bakend.Model.Category;
 import com.backend.bakend.Model.Item;
-// import com.backend.bakend.service.ContractService;
+import com.backend.bakend.service.ContractService;
 import com.backend.bakend.service.ItemService;
 
-@CrossOrigin
 @RestController
-@RequestMapping("/itemContract") // <-- T0 Make sure this matches in Postman
+@CrossOrigin(origins = "http://localhost:3000", methods = { RequestMethod.POST })
+@RequestMapping("/itemContract")
 public class ItemController {
 
   @Autowired
   ItemService itemService;
 
-  // @Autowired
-  // ContractService contractService;
+  @Autowired
+  ContractService contractService;
 
   @PostMapping(value = "/addItem/{ownerId}", consumes = "multipart/form-data")
   public ResponseEntity<Item> addItem(
@@ -71,15 +71,6 @@ public class ItemController {
   // @DeleteMapping("/deleteItem/{id}")
   // public void deleteItem(@PathVariable String id) {
   // itemService.deleteItem(id);
-  // }
-
-  // // adding a contract
-  // @PostMapping("/addContract/{borrowerId}/{itemId}/{startDate}/{endDate}")
-  // public String addContract(@PathVariable String borrowerId,
-  // @PathVariable String itemId,
-  // @PathVariable String startDate,
-  // @PathVariable String endDate) {
-  // return contractService.addContract(borrowerId, itemId, startDate, endDate);
   // }
 
   // @DeleteMapping("/deleteContract/{id}")

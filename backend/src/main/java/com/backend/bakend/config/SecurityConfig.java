@@ -3,6 +3,7 @@ package com.backend.bakend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,10 +36,11 @@ public class SecurityConfig {
 
     return http.cors().and()
         .csrf(customizer -> customizer.disable()) // disabling cross site request forgery.
-        .authorizeHttpRequests(requests -> requests
+        .authorizeHttpRequests(requests -> requests 
             // authentication required for routes other than login, addUser.
-            .requestMatchers("/addUser", "/login","/itemContract/items").permitAll()
-            .requestMatchers("/itemContract/**").hasAuthority("ROLE_USER")
+            .requestMatchers("/addUser", "/login", "/itemContract/items").permitAll() 
+
+            .requestMatchers(HttpMethod.POST,"/itemContract/**").hasAuthority("ROLE_USER")
             .anyRequest().authenticated())
         // .formLogin(Customizer.withDefaults()) //formlogin in browser
         .httpBasic(Customizer.withDefaults()) // allows postman to work.
@@ -46,7 +48,7 @@ public class SecurityConfig {
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
-  
+
 
   @Bean
   public AuthenticationProvider authenticationProvider() {
