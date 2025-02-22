@@ -18,7 +18,7 @@ export default function Home() {
     } else {
       try {
         const userData = JSON.parse(user); // Parse the user data properly
-        console.log("userData", userData);
+        // console.log("userData", userData);
         
         // Check if userData.items exists and is an array
         if (userData.items && Array.isArray(userData.items)) {
