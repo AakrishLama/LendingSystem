@@ -50,7 +50,7 @@ public class ItemController {
     item.setPricePerDay(pricePerDay);
     item.setCategory(Category.valueOf(category));
     item.setAvailable(available);
-
+    item.setOwnerId(ownerId);
     item.setImageName(image.getOriginalFilename());
     item.setImageType(image.getContentType());
     item.setImageData(image.getBytes());
@@ -73,7 +73,7 @@ public class ItemController {
   // itemService.deleteItem(id);
   // }
 
-  // adding a contract
+  // // adding a contract
   // @PostMapping("/addContract/{borrowerId}/{itemId}/{startDate}/{endDate}")
   // public String addContract(@PathVariable String borrowerId,
   // @PathVariable String itemId,

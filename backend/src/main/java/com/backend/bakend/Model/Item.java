@@ -19,7 +19,7 @@ public class Item {
   private String date;
   private Category category;
   private boolean available = true;
-  private String ownerName;
+  private String ownerId;
   // Images
   private String imageName;
   private String imageType;

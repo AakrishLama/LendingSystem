@@ -39,7 +39,7 @@ public class ItemService {
     int creditsInc = owner.getCredits() + 100;
     owner.setCredits(creditsInc);
     userRepo.save(owner);
-    item.setOwnerName(owner.getName());
+    item.setOwnerId(ownerId);
     return itemRepo.save(item);
   }
 

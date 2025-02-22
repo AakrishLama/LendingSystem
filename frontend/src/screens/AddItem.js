@@ -38,6 +38,7 @@ export default function AddItem() {
       // so we need to convert it to "true" or "false" manually.
       formData.append("available", item.available ? "true" : "false");
       formData.append("image", item.image);
+      formData.append("ownerId", user.id);
 
       // console.log("Form Data:")
       // for (var pair of formData.entries()) {

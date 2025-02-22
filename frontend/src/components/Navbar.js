@@ -31,7 +31,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "lightblue" }}>
         <div className="container-fluid">
           <Link className="navbar-brand fw-bold " style={{ fontStyle: "italic", visibility: "visible", color: "purple" }}
-            to="/SideBar"> <FaSlideshare />
+            to="/"> <FaSlideshare />
             Lending System</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

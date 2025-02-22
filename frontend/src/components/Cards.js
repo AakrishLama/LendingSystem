@@ -18,12 +18,13 @@ export default function Cards({ item }) {
       <div className="my-2 mx-2 card" style={{ width: "18rem" }}>
         <img src={imageDataURL ? imageDataURL : "/carauselPic/pic2.png"}
           className="card-img-top" alt="..." style={{ height: "120px", objectFit: "fill" }} />
+          <p>itemID = {item.id}</p>
         <div className="card-body">
           <h5 className="card-title">{item.name}</h5>
           <p className="card-text-description" rows="3">{item.description}</p>
           <p className="card-text"> category = {item.category}</p>
           <p className="card-text"> price = {item.pricePerDay}</p>
-          <p className="card-text"> owner = {item.ownerName}</p>
+          <p className="card-text"> owner = {item.ownerId}</p>
           <p className="card-text"> available = {item.available? "yes" : "no"}</p>
 
 

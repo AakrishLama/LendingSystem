@@ -28,17 +28,17 @@
 //   @Autowired
 //   ItemRepository itemRepo;
 
-//   private int advanceDay = 0;
+//   // private int advanceDay = 0;
 //   private LocalDate currentDate = LocalDate.now();
 //   private ArrayList<Contract> contracts = new ArrayList<>();
 
-//   public void setAdvanceDay(int days) {
-//     this.advanceDay = days;
-//   }
+//   // public void setAdvanceDay(int days) {
+//   //   this.advanceDay = days;
+//   // }
 
-//   public int getAdvanceDay() {
-//     return advanceDay;
-//   }
+//   // public int getAdvanceDay() {
+//   //   return advanceDay;
+//   // }
 
 //   public String addContract(String borrowerId, String itemId, String startDate, String endDate) {
 //     // setting the borrower for the contract.
@@ -55,9 +55,9 @@
 //     User owner = userRepo.findById(lender).orElse(null);
 //     contract.setOwner(owner);
 
-//     if (item.isAvailable() != true) {
-//       return "Item is not available";
-//     }
+//     // if (item.isAvailable() != true) {
+//     //   return "Item is not available";
+//     // }
 
 //     LocalDate start = LocalDate.parse(startDate.trim(), formatter()); // trim to remove leading and ending spaces.
 //     LocalDate end = LocalDate.parse(endDate.trim(), formatter());
@@ -68,7 +68,7 @@
 
 //     int totalCreditRequired = duration * item.getPricePerDay();
 //     if (totalCreditRequired > borrower.getCredits()) {
-//       return "Borrower does not have enough credits";
+//       return "Borrower does not have enough credits. Required: " + totalCreditRequired + ", Available: " + borrower.getCredits();
 //     } else {
 //       // saving the borrower with decremented credits.
 //       borrower.setCredits(borrower.getCredits() - totalCreditRequired);
@@ -134,20 +134,20 @@
 //     return formatter;
 //   }
 
-//   public String advanceContractDay(String contractId, int days) {
-//     Contract contract = contractRepo.findById(contractId).orElse(null);
-//     if (contract == null) {
-//       return "Contract not found!";
-//     } else {
-//       currentDate = currentDate.plusDays(days);
-//       LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
+//   // public String advanceContractDay(String contractId, int days) {
+//   //   Contract contract = contractRepo.findById(contractId).orElse(null);
+//   //   if (contract == null) {
+//   //     return "Contract not found!";
+//   //   } else {
+//   //     currentDate = currentDate.plusDays(days);
+//   //     LocalDate endDate = LocalDate.parse(contract.getEndDate(), this.formatter());
 
-//       if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
-//         deleteContract(contractId);
-//         return "Contract " + contractId + " has expired and was deleted.";
-//       }
-//     }
-//     return "Contract " + contractId + " advanced by " + days + " day(s).";
+//   //     if (currentDate.isAfter(endDate) || currentDate.isEqual(endDate)) {
+//   //       deleteContract(contractId);
+//   //       return "Contract " + contractId + " has expired and was deleted.";
+//   //     }
+//   //   }
+//   //   return "Contract " + contractId + " advanced by " + days + " day(s).";
 
-//   }
+//   // }
 // }
