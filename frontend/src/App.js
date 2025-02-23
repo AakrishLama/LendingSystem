@@ -17,6 +17,7 @@ import ItemDetails from './screens/ItemDetails';
 import { ItemsProvider } from './components/ItemsContext';
 import About from './screens/About.js';
 import SideBar from './components/SideBar';
+import MyItems from './screens/MyItems';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/ItemDetails" element={<ItemDetails />}> </Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/SideBar" element={<SideBar />}> </Route>
+            <Route path="/myItems" element={<MyItems />}></Route>
           </Routes>
         </ItemsProvider>
       </AuthProvider>

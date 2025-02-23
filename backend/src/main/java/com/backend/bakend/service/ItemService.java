@@ -48,6 +48,13 @@ public class ItemService {
     return itemRepo.findAll();
   }
 
+  public List<Item> getMyItems(String ownerId) {
+    System.out.println("Fetching items for owner: " + ownerId);
+    List<Item> items = itemRepo.findByOwnerId(ownerId);
+    System.out.println("Found items: " + items.size());
+    return items;  
+  }
+
   // public void deleteItem(String id) {
   //   Item targetItem = itemRepo.findById(id).orElse(null);
   //   if (targetItem == null){

@@ -34,7 +34,7 @@ export default function SideBar({ showSidebar, closeSideBar }) {
           </div>
           <br></br>
           <div className='fs-5  text-black border border-2 w-100 text-center'>
-            <Link className="mx-5 sidebar-brand fw-bold text-center text-black" to="/ItemDetails"><CiCircleList />
+            <Link className="mx-5 sidebar-brand fw-bold text-center text-black" to="/myItems"><CiCircleList />
               My Items</Link>
           </div>
           <br></br>

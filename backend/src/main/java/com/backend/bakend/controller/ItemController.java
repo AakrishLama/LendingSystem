@@ -68,6 +68,11 @@ public class ItemController {
     return itemService.getAllItems();
   }
 
+  @GetMapping("/myItems/{ownerId}")
+  public List<Item> myItems(@PathVariable String ownerId){
+    return itemService.getMyItems(ownerId);
+  }
+
   // @DeleteMapping("/deleteItem/{id}")
   // public void deleteItem(@PathVariable String id) {
   // itemService.deleteItem(id);
