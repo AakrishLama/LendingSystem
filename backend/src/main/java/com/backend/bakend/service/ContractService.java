@@ -55,10 +55,14 @@ public class ContractService {
         return "Error: Item not found.";
     }
 
+    System.out.println("Item Availability Check: " + item.isAvailable());
+
     // Check item availability
     if (!item.isAvailable()) {
+        System.out.println("Error: Item is not available.");
         return "Error: Item is not available.";
     }
+
 
     // Fetch lender
     String lenderId = item.getOwnerId();

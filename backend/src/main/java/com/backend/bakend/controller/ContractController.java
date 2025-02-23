@@ -26,6 +26,9 @@ public class ContractController {
 
     try {
       String response = contractService.addContract(borrowerId, itemId, startDate, endDate);
+      if(response.contains("Error")) {  
+        return ResponseEntity.badRequest().body(response);
+      }
       return ResponseEntity.ok(response);
     } catch (Exception e) {
       e.printStackTrace(); // Log the error

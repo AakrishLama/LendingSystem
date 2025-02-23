@@ -17,7 +17,6 @@ import ItemDetails from './screens/ItemDetails';
 import { ItemsProvider } from './components/ItemsContext';
 import About from './screens/About.js';
 import SideBar from './components/SideBar';
-import AddContract from './screens/AddContract.jsx';
 
 function App() {
   return (
@@ -33,7 +32,6 @@ function App() {
             <Route path="/ItemDetails" element={<ItemDetails />}> </Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/SideBar" element={<SideBar />}> </Route>
-            <Route path="/addContract" element={<AddContract />}> </Route>
           </Routes>
         </ItemsProvider>
       </AuthProvider>
