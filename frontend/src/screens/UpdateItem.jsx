@@ -53,11 +53,11 @@ export default function UpdateItem() {
     formData.append("available", item.available ? "true" : "false");
     formData.append("image", item.image);
 
-    console.log("Image File:", item.image ? item.image.name : "No image selected");
-    console.log("Image Type:", item.image ? item.image.type : "No image selected");
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
+    // console.log("Image File:", item.image ? item.image.name : "No image selected");
+    // console.log("Image Type:", item.image ? item.image.type : "No image selected");
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ': ' + pair[1]);
+    // }
     try {
       const response = await fetch(`http://localhost:8080/itemContract/updateItem/${item.id}`, {
         method: "PUT",

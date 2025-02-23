@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
+import Contract from '../components/Contract';
 
 export default function MyContracts() {
   const [myContracts, setMyContracts] = useState([]);
@@ -30,7 +31,7 @@ export default function MyContracts() {
           const data = await response.json();
           setMyContracts(data);
         } else {
-          setError("Failed to fetch contracts. Please try again later.");
+          setError("No contracts found.");
         }
       } catch (error) {
         setError("Error fetching contracts. Please try again later.");
@@ -54,14 +55,17 @@ export default function MyContracts() {
     <>
       <Navbar />
       <div className="container">
-        <h1>My Contracts</h1>
+        <h1>My Contracts: {myContracts.length} Contracts</h1>
         <div>
           {myContracts.length === 0 ? (
-            <p>No contracts found.</p>
+            <>
+              <Navbar />
+              <p>No contracts found.</p>
+            </>
           ) : (
             myContracts.map((contract) => (
-              <div key={contract.id}>
-                <p>Contract with {contract.borrower.name}</p>
+              <div key={contract.id} className='my-2 border border-2'>
+                <Contract contract={contract} />
               </div>
             ))
           )}
