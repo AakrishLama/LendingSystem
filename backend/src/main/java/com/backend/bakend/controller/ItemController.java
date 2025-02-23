@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,24 +64,43 @@ public class ItemController {
     }
   }
 
+  /**
+   * Update Item.
+   */
+  @PutMapping("/updateItem/{itemId}")
+  public ResponseEntity<Item> updateItem(@PathVariable String itemId,
+      @RequestParam("name") String name,
+      @RequestParam("description") String description,
+      @RequestParam("pricePerDay") int pricePerDay,
+      @RequestParam("category") String category,
+      @RequestParam("available") boolean available,
+      @RequestParam("image") MultipartFile image) throws IOException {
+        try {
+          return new ResponseEntity<>(itemService.updateItem(itemId, name, description, pricePerDay, category, available, image), HttpStatus.OK);
+        } catch (Exception e) {
+          return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      }
+
+  /**
+   * get all items
+   */
   @GetMapping("/items")
   public List<Item> items() {
     return itemService.getAllItems();
   }
 
+  /**
+   * get logged in user's items.
+   */
   @GetMapping("/myItems/{ownerId}")
-  public List<Item> myItems(@PathVariable String ownerId){
+  public List<Item> myItems(@PathVariable String ownerId) {
     return itemService.getMyItems(ownerId);
   }
 
   // @DeleteMapping("/deleteItem/{id}")
   // public void deleteItem(@PathVariable String id) {
   // itemService.deleteItem(id);
-  // }
-
-  // @DeleteMapping("/deleteContract/{id}")
-  // public void deleteContract(@PathVariable String id) {
-  // contractService.deleteContract(id);
   // }
 
   // @PostMapping("/advanceDay/{contractId}/{days}")

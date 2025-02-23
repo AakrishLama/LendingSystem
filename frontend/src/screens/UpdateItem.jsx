@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
+//   @PutMapping("/updateItem/{itemId}")
+// public ResponseEntity<Item> updateItem(@PathVariable String itemId,
+//   @RequestParam("name") String name,
+//   @RequestParam("description") String description,
+//   @RequestParam("pricePerDay") int pricePerDay,
+//   @RequestParam("category") String category,
+//   @RequestParam("available") boolean available,
+//   @RequestParam("image") MultipartFile image) throws IOException {
 export default function UpdateItem() {
   const location = useLocation();
   const [item, setItem] = useState(null);
   const [outPic, setOutPic] = useState(null);
 
-  const user = sessionStorage.getItem("user");
-  const userid = JSON.parse(user).id;
-
   const handleChange = (event) => {
     setItem({ ...item, [event.target.name]: event.target.value })
   }
   const handleImage = (e) => {
-    console.log("working")
     const file = e.target.files[0];
     setItem({ ...item, image: file });
     console.log(file);
@@ -43,20 +47,32 @@ export default function UpdateItem() {
     formData.append("description", item.description);
     formData.append("pricePerDay", item.pricePerDay);
     formData.append("category", item.category);
-    // form data converts boolean to string however some browser might send it as "on" or "".
-    // so we need to convert it to "true" or "false" manually.
     formData.append("available", item.available ? "true" : "false");
     formData.append("image", item.image);
-    formData.append("ownerId", userid);
 
-    // console.log("Form Data:")
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ': ' + pair[1]);
-    // }
     console.log("Image File:", item.image ? item.image.name : "No image selected");
     console.log("Image Type:", item.image ? item.image.type : "No image selected");
     for (var pair of formData.entries()) {
       console.log(pair[0] + ': ' + pair[1]);
+    }
+    try {
+      const response = await fetch(`http://localhost:8080/itemContract/updateItem/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+        },
+        body: formData
+      })
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log(data);
+      }else{
+        console.log(response.status);
+      }
+      
+    } catch (error) {
+      console.log("server error", error);
+      
     }
   }
   return (

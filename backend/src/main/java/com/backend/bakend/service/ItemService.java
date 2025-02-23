@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.backend.bakend.Model.Category;
 import com.backend.bakend.Model.Item;
 import com.backend.bakend.Model.User;
 import com.backend.bakend.repo.ItemRepository;
@@ -53,6 +54,24 @@ public class ItemService {
     List<Item> items = itemRepo.findByOwnerId(ownerId);
     System.out.println("Found items: " + items.size());
     return items;  
+  }
+
+  public Item updateItem(String itemId, String name, String description, int pricePerDay, String category,
+      boolean available, MultipartFile image) throws IOException {
+    Item item = itemRepo.findById(itemId).orElse(null);
+    if(item == null){
+      throw new RuntimeException("Item not found");
+    } else{
+      item.setName(name);
+      item.setDescription(description);
+      item.setPricePerDay(pricePerDay);
+      item.setCategory(Category.valueOf(category));
+      item.setAvailable(available);
+      item.setImageName(image.getOriginalFilename());
+      item.setImageType(image.getContentType());
+      item.setImageData(image.getBytes());
+      return itemRepo.save(item);
+    }
   }
 
   // public void deleteItem(String id) {

@@ -35,8 +35,8 @@ export default function MyProfile() {
         body: JSON.stringify(credentials)
       })
       if (reponse.status === 200) {
-        const data = await reponse.json();
-        console.log(data);
+        // const data = await reponse.json();
+        // console.log("success", data);
         alert("Profile updated successfully");
         navigate("/login");
       }else{

@@ -49,7 +49,6 @@ export default function MyContracts() {
   if (error) {
     return <div>{error}</div>;
   }
-  console.log("myContracts", myContracts);
 
   return (
     <>
@@ -62,9 +61,7 @@ export default function MyContracts() {
           ) : (
             myContracts.map((contract) => (
               <div key={contract.id}>
-                {/* Render contract details here */}
                 <p>Contract with {contract.borrower.name}</p>
-                {/* You can add more details based on contract data */}
               </div>
             ))
           )}
