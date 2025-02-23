@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -149,6 +150,12 @@ public class ContractService {
   public DateTimeFormatter formatter() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     return formatter;
+  }
+
+
+  public List<Contract> getMyContracts(String userId) {
+    // TODO Auto-generated method stub
+    return contractRepo.findByBorrowerId(userId);
   }
 
   // public String advanceContractDay(String contractId, int days) {

@@ -1,15 +1,18 @@
 package com.backend.bakend.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.backend.bakend.Model.Contract;
 import com.backend.bakend.service.ContractService;
 
 @RestController
-@RequestMapping("/itemContract") // ✅ All endpoints now start with /itemContract
+@RequestMapping("/itemContract") //  All endpoints now start with /itemContract
 public class ContractController {
 
   private final ContractService contractService;
+
 
   public ContractController(ContractService contractService) {
     this.contractService = contractService;
@@ -39,5 +42,17 @@ public class ContractController {
   @GetMapping("/test")
   public String test() {
     return "Contract API is working!";
+  }
+
+/**
+ * Get a user's contracts.
+ */
+  @GetMapping("/myContracts/{userId}")
+  public ResponseEntity<List<Contract>> getMyContracts(@PathVariable String userId) {
+    List<Contract> contracts = contractService.getMyContracts(userId);
+    if(contracts.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(contracts);
   }
 }

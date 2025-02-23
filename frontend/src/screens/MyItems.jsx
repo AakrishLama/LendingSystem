@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import Cards from '../components/Cards'
-
-// @GetMapping("/myItems/{ownerId}")
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function MyItems() {
+  const navigate = useNavigate();
+  // retrieving user id from session storage
   const user = sessionStorage.getItem("user");
   const userid = JSON.parse(user).id;
-  console.log("userid", userid);
+
   const [myItems, setMyItems] = useState([]);
 
   useEffect(() => {
@@ -33,24 +33,51 @@ export default function MyItems() {
     };
 
     fetchItems();
-  }, [userid]); // Dependency array to make sure it runs again if the user changes
+  }, [userid]);
+  const handleUpdateClick = (item) => {
+    navigate(`/updateItem`, { state: { item } });
+  };
 
-console.log("myItems", myItems);
   return (
     <>
-      <Navbar /> 
+      <Navbar />
       <div className='container'>
-        <h1>  MyItems</h1>
+        <h1>My Items</h1>
         <div className="d-flex flex-wrap"> {/* Add flex-wrap to wrap the items if necessary */}
-        {myItems.map((item)=>{
-          return <>
-          <div className='d-flex' style={{display:"flex"}}>
-           <Cards key={item.id} item={item} />
-          </div>
-          </>
-        })}
+          {myItems.map((item) => {
+            return (
+              <div className='d-flex' style={{ display: "flex" }} key={item.id}>
+                <div className="my-2 mx-2 card" style={{ width: "18rem" }}>
+                  <img src={item.imageData && item.imageType
+                    ? `data:${item.imageType};base64,${item.imageData}`
+                    : "/carauselPic/pic2.png"}
+                    className="card-img-top" alt="..." style={{ height: "120px", objectFit: "fill" }} />
+                  <div className="card-body">
+                    <h5 className="card-title">{item.name}</h5>
+                    <p className="card-text-description" rows="3">{item.description}</p>
+                    <p className="card-text">Category: {item.category}</p>
+                    <p className="card-text">Price: {item.pricePerDay}</p>
+                    <p className="card-text">Owner: {item.ownerId}</p>
+                    <p className="card-text">Available: {item.available ? "Yes" : "No"}</p>
+
+                    {/* If the logged-in user is the owner, show the Update button */}
+                    {item.ownerId === userid ? (
+                       <button
+                       onClick={() => handleUpdateClick(item)}
+                       className="btn btn-warning"
+                     >
+                       Update
+                     </button>
+                    ) : (
+                      <Link to={`/itemDetails`} className="btn btn-primary">View Details</Link>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
-  )
+  );
 }

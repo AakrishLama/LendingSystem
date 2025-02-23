@@ -18,6 +18,8 @@ import { ItemsProvider } from './components/ItemsContext';
 import About from './screens/About.js';
 import SideBar from './components/SideBar';
 import MyItems from './screens/MyItems';
+import UpdateItem from './screens/UpdateItem';
+import MyContracts from './screens/MyContracts.jsx';
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
             <Route path="/About" element={<About />}></Route>
             <Route path="/SideBar" element={<SideBar />}> </Route>
             <Route path="/myItems" element={<MyItems />}></Route>
+            <Route path="/updateItem" element= {<UpdateItem/>}></Route>
+            <Route path="/myContracts" element= {<MyContracts/>}></Route>
+
           </Routes>
         </ItemsProvider>
       </AuthProvider>
