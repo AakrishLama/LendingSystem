@@ -1,8 +1,12 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../components/AuthContext"; // Import AuthContext
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+
+//   @PutMapping("/updateUser/{userId}")
 
 export default function MyProfile() {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "" })
   const { user } = useContext(AuthContext); // Get user from context
 
@@ -22,9 +26,25 @@ export default function MyProfile() {
     console.log(credentials)
 
     try {
-      
+      const reponse= await fetch(`http://localhost:8080/updateUser/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+        },
+        body: JSON.stringify(credentials)
+      })
+      if (reponse.status === 200) {
+        const data = await reponse.json();
+        console.log(data);
+        alert("Profile updated successfully");
+        navigate("/login");
+      }else{
+        console.log(reponse.status);
+        alert("Profile update failed");
+      }
     } catch (error) {
-      
+      console.error("Error:", error);
     }
   }
   return (
@@ -34,13 +54,13 @@ export default function MyProfile() {
         <h2>My Profile</h2>
         <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
-        <input type="text" placeholder="...set new name" name="name" value={credentials.name} onChange={handleChange}required></input><br></br>
+        <input type="text" placeholder={user.name} name="name" value={credentials.name} onChange={handleChange}required></input><br></br>
 
         <label htmlFor="email">email:</label>
-        <input type="email" placeholder="...set new email" name="email" value={credentials.email} onChange={handleChange} required></input><br></br>
+        <input type="email" placeholder={user.email} name="email" value={credentials.email} onChange={handleChange} required></input><br></br>
 
         <label>Password: </label>
-        <input type="password" placeholder="...set new password" name="password" value={credentials.password} onChange={handleChange} required></input> <br></br>
+        <input type="password" placeholder="...set password" name="password" value={credentials.password} onChange={handleChange} required></input> <br></br>
 
         <label htmlFor="credits">Current credits:</label>
         <p >{user.credits}</p>
