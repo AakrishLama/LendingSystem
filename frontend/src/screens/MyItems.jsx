@@ -42,7 +42,7 @@ export default function MyItems() {
     <>
       <Navbar />
       <div className='container'>
-        <h1>My Items</h1>
+        <h1 style={{ textAlign: "center", display: "flex", justifyContent: "center" }}>My Items</h1>
         <div className="d-flex flex-wrap"> {/* Add flex-wrap to wrap the items if necessary */}
           {myItems.map((item) => {
             return (
@@ -62,12 +62,12 @@ export default function MyItems() {
 
                     {/* If the logged-in user is the owner, show the Update button */}
                     {item.ownerId === userid ? (
-                       <button
-                       onClick={() => handleUpdateClick(item)}
-                       className="btn btn-warning"
-                     >
-                       Update
-                     </button>
+                      <button
+                        onClick={() => handleUpdateClick(item)}
+                        className="btn btn-warning"
+                      >
+                        Update
+                      </button>
                     ) : (
                       <Link to={`/itemDetails`} className="btn btn-primary">View Details</Link>
                     )}

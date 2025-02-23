@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../components/AuthContext"; // Import AuthContext
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //   @PutMapping("/updateUser/{userId}")
 
@@ -14,7 +14,7 @@ export default function MyProfile() {
     return <p>Loading profile...</p>; // Prevent errors when user is null
   }
 
-  const handleChange= (e)=>{
+  const handleChange = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value
@@ -26,7 +26,7 @@ export default function MyProfile() {
     console.log(credentials)
 
     try {
-      const reponse= await fetch(`http://localhost:8080/updateUser/${user.id}`, {
+      const reponse = await fetch(`http://localhost:8080/updateUser/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export default function MyProfile() {
         // console.log("success", data);
         alert("Profile updated successfully");
         navigate("/login");
-      }else{
+      } else {
         console.log(reponse.status);
         alert("Profile update failed");
       }
@@ -49,28 +49,32 @@ export default function MyProfile() {
   }
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="my-2 container">
         <h2>My Profile</h2>
         <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" placeholder={user.name} name="name" value={credentials.name} onChange={handleChange}required></input><br></br>
+          <div className="container border border-2 justify-content-center text-center" style={{ borderRadius: "10px" }}>
+            <label htmlFor="name" className="my-2 fs-2 fw-bold mx-3" >Name:</label>
+            <input type="text" placeholder={user.name} name="name" value={credentials.name} onChange={handleChange} required></input><br></br>
 
-        <label htmlFor="email">email:</label>
-        <input type="email" placeholder={user.email} name="email" value={credentials.email} onChange={handleChange} required></input><br></br>
+            <label htmlFor="email" className="my-2 fs-2 fw-bold mx-3" >email:</label>
+            <input type="email" placeholder={user.email} name="email" value={credentials.email} onChange={handleChange} required></input><br></br>
 
-        <label>Password: </label>
-        <input type="password" placeholder="...set password" name="password" value={credentials.password} onChange={handleChange} required></input> <br></br>
+            <label className="my-2 fs-2 fw-bold mx-3">Password: </label>
+            <input type="password" placeholder="...set password" name="password" value={credentials.password} onChange={handleChange} required></input> <br></br>
 
-        <label htmlFor="credits">Current credits:</label>
-        <p >{user.credits}</p>
+            <label htmlFor="credits" className="my-2 fs-2 fw-bold mx-3">Current credits:</label>
+            <p className="fs-1">{user.credits}</p>
 
-        <p> date: {user.date}</p>
+            <p className="my-2 fs-2 fw-bold mx-3"> Date of Creation: {user.date}</p>
 
-        {user.items.map((item) => (
-          <p>item = {item}</p>
-        ))}
-        <button type="submit">Update Profile</button>
+
+            <Link to="/myItems">Number of owned Items: {user.items.length}</Link><br></br>
+
+          </div>
+          <div className="my-2">
+            <button className="btn btn-primary justify-content-center text-center" type="submit">Update Profile</button>
+          </div>
         </form>
       </div>
     </>
