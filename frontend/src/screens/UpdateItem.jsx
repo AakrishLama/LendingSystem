@@ -63,7 +63,7 @@ export default function UpdateItem() {
     <div>
       <Navbar />
       <div className='container'>
-        <h1>Update Item</h1>
+        <h1>{item.name}</h1>
         <form onSubmit={handleSubmit} >
           <div className="form-group">
             <label htmlFor="exampleFormControlInput1">Item Name</label>

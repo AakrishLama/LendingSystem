@@ -67,4 +67,15 @@ public class UserService {
       return new AuthResponse(null, null);
     }
   }
+
+  public User updateUser(String userId, User user) {
+    User existingUser = repo.findById(userId)
+        .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+    
+    existingUser.setName(user.getName());
+    existingUser.setEmail(user.getEmail());
+    existingUser.setPassword(encoder.encode(user.getPassword()));
+    
+    return repo.save(existingUser);
+}
 }
