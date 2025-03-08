@@ -38,7 +38,6 @@ function App() {
             <Route path="/myItems" element={<MyItems />}></Route>
             <Route path="/updateItem" element= {<UpdateItem/>}></Route>
             <Route path="/myContracts" element= {<MyContracts/>}></Route>
-
           </Routes>
         </ItemsProvider>
       </AuthProvider>
