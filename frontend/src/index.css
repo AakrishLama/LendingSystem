@@ -11,6 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.card-text-description {
+  display: -webkit-box; /* Use the old flexbox for compatibility */
+  -webkit-line-clamp: 1; /* Limit to 3 lines */
+  -webkit-box-orient: vertical; /* Vertical orientation */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  max-height: 3.6em; /* Adjust based on line height (1.2em per line) */
+  line-height: 1.2em; /* Set line height */
+}
 
 /* .toggle-btn {
   background-color: rgb(54, 59, 60);
