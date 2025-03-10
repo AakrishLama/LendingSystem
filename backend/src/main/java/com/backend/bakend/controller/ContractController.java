@@ -18,6 +18,14 @@ public class ContractController {
     this.contractService = contractService;
   }
 
+  /**
+   * Add a contract.
+   * @param borrowerId
+   * @param itemId
+   * @param startDate
+   * @param endDate
+   * @return
+   */
   @PostMapping("/addContract/{borrowerId}/{itemId}/{startDate}/{endDate}")
   public ResponseEntity<?> addContract(
       @PathVariable String borrowerId,

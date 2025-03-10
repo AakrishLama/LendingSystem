@@ -82,7 +82,7 @@ export default function ItemDetails() {
         <p>Description = {selectedItem.description}</p>
         <p>Category = {selectedItem.category}</p>
         <p>Price = {selectedItem.pricePerDay}</p>
-        <p>Owner = {selectedItem.ownerName}</p>
+        <p>Owner = {selectedItem.ownerId}</p>
         <p>Availability = {selectedItem.available ? "Yes" : "No"}</p>
 
         <button onClick={() => setRent(!rent)}>Rent</button>

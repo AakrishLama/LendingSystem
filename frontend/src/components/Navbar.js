@@ -4,7 +4,6 @@ import AuthContext from "../components/AuthContext";
 import { IoMenu } from "react-icons/io5";
 import { FaSlideshare } from "react-icons/fa6";
 import SideBar from './SideBar';
-import { IoIosNotifications } from "react-icons/io";
 
 
 export default function Navbar() {
@@ -61,7 +60,6 @@ export default function Navbar() {
               <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/myProfile"
                 style={{ backgroundColor: "lightblue", textAlign: "center", textDecorationColor: "black", visibility: "visible" }}>
                 {JSON.parse(sessionStorage.getItem("user")).name}</Link>
-                <Link className='btn btn-outline-success me-2 border-2 fw-bold text-black'> <IoIosNotifications /></Link>
             </>
               : <>
                 <Link className="btn btn-outline-success me-2 border-2 fw-bold text-black" type="submit" to="/Login"
