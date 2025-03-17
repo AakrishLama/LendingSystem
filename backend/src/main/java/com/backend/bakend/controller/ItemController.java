@@ -75,12 +75,13 @@ public class ItemController {
       @RequestParam("category") String category,
       @RequestParam("available") boolean available,
       @RequestParam("image") MultipartFile image) throws IOException {
-        try {
-          return new ResponseEntity<>(itemService.updateItem(itemId, name, description, pricePerDay, category, available, image), HttpStatus.OK);
-        } catch (Exception e) {
-          return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-      }
+    try {
+      return new ResponseEntity<>(
+          itemService.updateItem(itemId, name, description, pricePerDay, category, available, image), HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   /**
    * get all items
@@ -97,16 +98,5 @@ public class ItemController {
   public List<Item> myItems(@PathVariable String ownerId) {
     return itemService.getMyItems(ownerId);
   }
-
-  // @DeleteMapping("/deleteItem/{id}")
-  // public void deleteItem(@PathVariable String id) {
-  // itemService.deleteItem(id);
-  // }
-
-  // @PostMapping("/advanceDay/{contractId}/{days}")
-  // public String advanceContractDay(@PathVariable String contractId,
-  // @PathVariable int days) {
-  // return contractService.advanceContractDay(contractId, days);
-  // }
 
 }

@@ -60,21 +60,6 @@ public class UserController {
     return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
   }
 
-  // @GetMapping("/login") Manual checking without token.
-  // public ResponseEntity<Object> login(@RequestBody Login login) {
-  // User user = userService.findByEmail(login.getEmail());
-  // if (user == null) {
-  // response.put("message", "User not found");
-  // return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-  // }
-  // if (!user.getPassword().equals(login.getPassword())) {
-  // response.put("message", "Incorrect Password");
-  // return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-  // }
-  // response.put("message", "Login successful");
-  // return new ResponseEntity<>(user, HttpStatus.OK);
-  // }
-
   @PostMapping("/login")
   public ResponseEntity<AuthResponse> login(@RequestBody Login loginUser) {
     AuthResponse authResponse = userService.verify(loginUser);

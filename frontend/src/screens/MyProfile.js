@@ -70,7 +70,6 @@ export default function MyProfile() {
 
 
             <Link to="/myItems">Number of owned Items: {user.items.length}</Link><br></br>
-
           </div>
           <div className="my-2">
             <button className="btn btn-primary justify-content-center text-center" type="submit">Update Profile</button>
