@@ -47,7 +47,6 @@ export default function Login() {
   return (
     <div>
       <Navbar />
-      <p>Login</p>
       <form className='my-2 container  border border-2 p-3' onSubmit={handleSubmit}>
         <div className="mb-3">
 

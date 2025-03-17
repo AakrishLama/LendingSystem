@@ -12,6 +12,7 @@ export default function Cards({ item }) {
 
     const handleItemClick = () => {
       setSelectedItem(item);  // Set the selected item when clicked
+      console.log("Selected item:", item);
     };
   return (
     <div>

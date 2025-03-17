@@ -75,17 +75,21 @@ export default function ItemDetails() {
   return (
     <>
       <Navbar />
-      <div className="my-4 container">
-        <p>Borrower ID = {user?.id || "No user logged in"}</p>
-        <p>Item Name = {selectedItem.name}</p>
-        <p>ID = {selectedItem.id}</p>
-        <p>Description = {selectedItem.description}</p>
-        <p>Category = {selectedItem.category}</p>
-        <p>Price = {selectedItem.pricePerDay}</p>
-        <p>Owner = {selectedItem.ownerId}</p>
-        <p>Availability = {selectedItem.available ? "Yes" : "No"}</p>
+      <div className="my-4 container border border-2 ">
+        <img src={selectedItem.imageData && selectedItem.imageType ?
+        `data:${selectedItem.imageType};base64,${selectedItem.imageData}`
+        :"/carauselPic/pic2.png"}
+        style={{ height: "20rem", objectFit: "fill" }}></img>
+        {/* <p>Borrower ID = {user?.id || "No user logged in"}</p> */}
+        <h1>Item Name = {selectedItem.name}</h1>
+        {/* <h3>ID = {selectedItem.id}</h3> */}
+        <h3>Description = {selectedItem.description}</h3>
+        <h3>Category = {selectedItem.category}</h3>
+        <h3>Price = {selectedItem.pricePerDay}</h3>
+        <h3>Owner = {selectedItem.ownerId}</h3>
+        <h3>Availability = {selectedItem.available ? "Yes" : "No"}</h3>
 
-        <button onClick={() => setRent(!rent)}>Rent</button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded " onClick={() => setRent(!rent)}>Rent</button>
 
         {rent && (
           <div className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-md max-w-md mx-auto">
